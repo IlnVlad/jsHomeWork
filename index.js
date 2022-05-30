@@ -1,36 +1,38 @@
 "use strict";
 
-const goods = [
-    { title: 'Shirt', price: 150 },
-    { title: 'Socks', price: 50 },
-    { title: 'Jacket', price: 350 },
-    { title: 'Shoes', price: 250 },
-];
+const url = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json';
 
 class GoodsItem {
-    constructor({ title = 'значение', price = 'значение' }) {
-        this.title = title;
+    constructor({ product_name = 'значение', price = 'значение' }) {
+        this.product_name = product_name;
         this.price = price;
 
     }
     render() {
-        return `<div class="goods-item"><h3>${this.title}</h3><p>${this.price}</p></div>`;
+        return `<div class="goods-item"><h3>${this.product_name}</h3><p>${this.price}</p></div>`;
     }
 }
 
 
 class GoodsList {
     constructor(list = []) {
-        this.list = list;
+        this.list = this.getData();
     }
-    render() {
-        const goodsList = this.list.map((item) => {
+    async getData() {
+        const response = await fetch(url);
+        const data = await response.json();
+        return this.list = await data;
+    }
+    async render() {
+        await this.list;
+        const goodsList = await this.list.map((item) => {
             const goodsItem = new GoodsItem(item);
             return goodsItem.render();
         });
         document.querySelector('.goods-list').innerHTML = goodsList.join(' ');
     }
-    getPrice() {
+    async getPrice() {
+        await this.list;
         const allPrice = this.list.reduce((accumulator, currentValue) => {
             return accumulator + currentValue.price;
         }, 0);
@@ -40,7 +42,8 @@ class GoodsList {
 }
 
 
-
-const goodsList = new GoodsList(goods);
+const goodsList = new GoodsList();
 goodsList.render();
 goodsList.getPrice();
+
+
