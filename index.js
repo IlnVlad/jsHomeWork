@@ -49,7 +49,7 @@ class BasketItems {
     async getBasket() {
         const response = await fetch(basketUrl);
         const data = await response.json();
-        return this.items = await data;
+        return this.items = await data.contents;
     }
 }
 
