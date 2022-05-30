@@ -1,6 +1,7 @@
 "use strict";
 
 const url = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json';
+const basketUrl = `https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/getBasket.json`;
 
 class GoodsItem {
     constructor({ product_name = 'значение', price = 'значение' }) {
@@ -41,9 +42,24 @@ class GoodsList {
 
 }
 
+class BasketItems {
+    constructor(items = []) {
+        this.items = this.getBasket();
+    }
+    async getBasket() {
+        const response = await fetch(basketUrl);
+        const data = await response.json();
+        return this.items = await data;
+    }
+}
+
 
 const goodsList = new GoodsList();
 goodsList.render();
 goodsList.getPrice();
+
+const basket = new BasketItems();
+basket.getBasket();
+console.log(basket);
 
 
