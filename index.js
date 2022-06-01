@@ -18,15 +18,22 @@ class GoodsItem {
 class GoodsList {
     constructor(list = []) {
         this.list = this.getData();
+        this.filteredItems = this.getData();
     }
     async getData() {
         const response = await fetch(url);
         const data = await response.json();
-        return this.list = await data;
+        return (this.list = await data, this.filteredItems = data);
+    }
+    async filter(str) {
+        await this.filteredItems;
+        this.filteredItems = this.list.filter(({ product_name }) => {
+            return (new RegExp(str, 'i')).test(product_name)
+        });
     }
     async render() {
-        await this.list;
-        const goodsList = await this.list.map((item) => {
+        await this.filteredItems;
+        const goodsList = await this.filteredItems.map((item) => {
             const goodsItem = new GoodsItem(item);
             return goodsItem.render();
         });
@@ -61,5 +68,11 @@ goodsList.getPrice();
 const basket = new BasketItems();
 basket.getBasket();
 console.log(basket);
+
+document.querySelector('.search-button').addEventListener('click', () => {
+    const input = document.querySelector('.search');
+    goodsList.filter(input.value);
+    goodsList.render();
+});
 
 
