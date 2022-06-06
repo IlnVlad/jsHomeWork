@@ -5,21 +5,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <link rel="stylesheet" href="style.css">
-    <script defer src="index.js"></script>
     <title>Document</title>
 </head>
 
 <body>
-    <header>
-        <button class="cart-button " type="button">Корзина</button>
-        <input class="search" type="text" placeholder="Вы ищите...">
-        <button class="search-button" type="button">Найти!</button>
-    </header>
-    <main>
-        <div class="goods-list"></div>
-        <div class="goods-list-allPrice"></div>
-    </main>
+    <div class="root" id="root">
+        <div class="header">
+            <h1>Тут могло быть Ваше Лого</h1>
+            <input type="text" v-model="searchValue" placeholder="Вы ищите...">
+            <button class="button" v-on:click="cartButtonClick">Корзина</button>
+        </div>
+        <div class="cart" v-if="isVisible">
+            <p>Список товаров</p>
+            <p>Цена товаров:</p>
+        </div>
+        <div class="wrapper">
+            <h1>{{ empty }}</h1>
+            <div class="goods-item" v-for="item in filteredItems">
+                <h1>{{ item.product_name }}</h1>
+                <h2>{{ item.price }}</h2>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
