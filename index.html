@@ -15,7 +15,7 @@
     <div class="root" id="root">
         <div class="header">
             <h1>Тут могло быть Ваше Лого</h1>
-            <input type="text" v-model="searchValue" placeholder="Вы ищите...">
+            <custom-search v-model="searchValue"></custom-search>
             <button class="button" v-on:click="cartButtonClick">Корзина</button>
         </div>
         <div class="cart" v-if="isVisible">
