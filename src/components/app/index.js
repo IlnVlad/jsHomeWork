@@ -1,11 +1,5 @@
-window.onload = () => {
-
-    Vue.component('custom-search', {
-        template: `
-        <input type="text" @input= "$emit('input', $event.target.value)" placeholder="Вы ищите...">
-        `
-    })
-
+import { PROD } from '../../constants'
+export default function startApp() {
     const app = new Vue({
         el: "#root",
         data: {
@@ -16,11 +10,10 @@ window.onload = () => {
             isVisible: false
         },
         mounted() {
-            fetch('http://localhost:8000/goods.json').then(res => res.json()).then(
+            fetch(PROD).then(res => res.json()).then(
                 data => {
                     this.items = data;
                     this.empty = '';
-                    console.log(data)
                 }
             )
         },
@@ -34,11 +27,6 @@ window.onload = () => {
         methods: {
             cartButtonClick() {
                 this.isVisible = !this.isVisible;
-                fetch('http://localhost:8000/basket').then(res => res.json()).then(
-                    data => {
-                        this.basketGoodsItems = data;
-                    }
-                )
             }
         }
     })

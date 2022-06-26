@@ -18,5 +18,10 @@
         "id_product": 4,
         "product_name": "SSD",
         "price": 12999
-    }
+    },
+	{
+		"id_product": 5,
+		"product_name": "Видеокарта",
+		"price": 60000
+	}
 ]

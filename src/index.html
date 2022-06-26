@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 
@@ -18,16 +16,9 @@
             <custom-search v-model="searchValue"></custom-search>
             <button class="button" v-on:click="cartButtonClick">Корзина</button>
         </div>
-        <div class="cart" v-if="isVisible">
-            <p>Список товаров</p>
-            <p>Цена товаров:</p>
-        </div>
+        <basket-goods v-if="isVisible" v-on:closeclick="cartButtonClick"></basket-goods>
         <div class="wrapper">
-            <h1>{{ empty }}</h1>
-            <div class="goods-item" v-for="item in filteredItems">
-                <h1>{{ item.product_name }}</h1>
-                <h2>{{ item.price }}</h2>
-            </div>
+            <goods-list v-for="item in filteredItems" v-bind:item="item"></goods-list>
         </div>
     </div>
 </body>
